@@ -45,7 +45,6 @@ do_plot("fft_res.png",np.abs(fourier_shifted))
 
 new_data = ifft2(fourier_img)
 
-
 hdu = fits.PrimaryHDU(data=np.real(new_data))
 hdu_list = fits.HDUList([hdu])
 hdu_list.writeto('result.fits', overwrite=True)
