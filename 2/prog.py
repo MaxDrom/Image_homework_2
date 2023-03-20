@@ -6,7 +6,7 @@ from scipy.ndimage import convolve
 
 def do_plot(name, data):
     fig, ax = plt.subplots()
-    ax.imshow(1000*np.abs(data))
+    ax.imshow(np.abs(data))
     fig.set_figwidth(data.shape[0]/100)   
     fig.set_figheight(data.shape[1]/100)    
     #plt.show()
@@ -17,7 +17,7 @@ with fits.open("noised.fits") as hdu_list:
 
 fourier_img = fft2(data) 
 fourier_shifted = fftshift(fourier_img)
-do_plot("fft.png",np.abs(fourier_shifted))
+do_plot("fft.png",1000*np.abs(fourier_shifted))
 
 kernel = 1/8*np.ones((3,3))
 kernel[1,1] = 0
@@ -33,7 +33,7 @@ for i in range(n):
             fourier_img[i,j] = four_mean[i,j]
 
 fourier_shifted = fftshift(fourier_img)
-do_plot("fft_res.png",np.abs(fourier_shifted))
+do_plot("fft_res.png",1000*np.abs(fourier_shifted))
 
 new_data = ifft2(fourier_img)
 
