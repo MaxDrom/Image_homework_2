@@ -23,8 +23,6 @@ def mean_nearest(x, y, data):
 with fits.open("noised.fits") as hdu_list:
     data = hdu_list[0].data
 
-(X, Y) = data.shape
-
 fourier_img = fft2(data) 
 fourier_shifted = fftshift(fourier_img)
 do_plot("fft.png",np.abs(fourier_shifted))
@@ -35,8 +33,10 @@ four_mean = convolve(fourier_img, kernel)
 difference = fourier_img - four_mean
 four_mean_sd = convolve(difference*np.conjugate(difference),kernel)
 four_mean_sd = np.sqrt(np.real(four_mean_sd))
-for i in range(X):
-    for j in range(Y):
+
+(n, m) = data.shape
+for i in range(n):
+    for j in range(m):
         if abs(fourier_img[i, j] - four_mean[i,j])> 5*four_mean_sd[i,j]:
             fourier_img[i,j] = four_mean[i,j]
 
