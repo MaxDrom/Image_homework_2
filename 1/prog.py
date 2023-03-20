@@ -11,7 +11,7 @@ for k in range(n):
     x.append(k/n*100)
     fft_image[np.unravel_index(sorted_ind[:k], fft_image.shape)] = 0
     new_image = np.real(ifft2(fft_image))
-    y .append(np.mean(1-np.abs(image-new_image)/image))
+    y.append(np.mean(1-np.abs(image-new_image)/image))
 
 plt.plot(x,y)
 plt.xlabel("%")
