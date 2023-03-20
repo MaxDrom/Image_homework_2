@@ -12,14 +12,6 @@ def do_plot(name, data):
     #plt.show()
     plt.savefig(name)
 
-def mean_nearest(x, y, data):
-    result = 0
-    for i in range(x-1, x+2):
-        for j in range(y-1, y+2):
-            if (i-x)**2+(j-y)**2 != 0:
-                result+= data[i, j]
-    return result
-
 with fits.open("noised.fits") as hdu_list:
     data = hdu_list[0].data
 
